@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  Badge,
   Container,
   Card,
   CardActionArea,
@@ -11,11 +12,19 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
+import {
+  ShoppingCart,
+  AddShoppingCart,
+  RemoveShoppingCart,
+} from "@material-ui/icons";
 import { addToCart } from './Redux/actions';
 
 import "./App.css";
 
 const useStyles = makeStyles({
+  CartBadge: {
+    margin: "25px 0",
+  },
   Card: {
     margin: "25px 0",
   },
@@ -23,12 +32,18 @@ const useStyles = makeStyles({
 
 function App() {
   const merchandise = useSelector((state) => state.merchandise);
+  const cart = useSelector((state) => state.cart);
   const classes = useStyles();
   const dispatch = useDispatch();
 
   return (
     <div className="App">
       <Container maxWidth="sm">
+
+        <Badge badgeContent={cart.length} color="primary" className={classes.CartBadge}>
+          <ShoppingCart />
+        </Badge>
+
         {merchandise.map((item, index) => {
           return (
             <Card key={index} className={classes.Card}>
@@ -54,7 +69,7 @@ function App() {
               </CardActionArea>
               <CardActions>
                 <Button size="small" color="primary" onClick={() => dispatch(addToCart(item))}>
-                  Add to Cart
+                  <AddShoppingCart/>
                 </Button>
               </CardActions>
             </Card>
