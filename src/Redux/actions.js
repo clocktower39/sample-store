@@ -1,6 +1,6 @@
 export const ADD_TO_CART = 'ADD_TO_CART';
 
-export function updateMessageList(item){
+export function addToCart(item){
     return {
         type: ADD_TO_CART,
         item: item,
