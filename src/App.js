@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Badge,
-  Container,
+  Button,
   Card,
   CardActionArea,
   CardMedia,
   CardContent,
   CardActions,
-  Button,
+  Container,
+  Drawer,
   Typography,
   makeStyles,
+  IconButton,
 } from "@material-ui/core";
 import {
+  Cancel,
   ShoppingCart,
   AddShoppingCart,
   RemoveShoppingCart,
@@ -22,8 +25,8 @@ import { addToCart } from './Redux/actions';
 import "./App.css";
 
 const useStyles = makeStyles({
-  CartBadge: {
-    margin: "25px 0",
+  IconButton: {
+    margin: '25px 0',
   },
   Card: {
     margin: "25px 0",
@@ -35,14 +38,20 @@ function App() {
   const cart = useSelector((state) => state.cart);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  }
 
   return (
     <div className="App">
       <Container maxWidth="sm">
-
-        <Badge badgeContent={cart.length} color="primary" className={classes.CartBadge}>
-          <ShoppingCart />
-        </Badge>
+        <IconButton className={classes.IconButton} onClick={toggleDrawer}>
+          <Badge badgeContent={cart.length} color="primary" className={classes.CartBadge}>
+            <ShoppingCart />
+          </Badge>
+        </IconButton>
 
         {merchandise.map((item, index) => {
           return (
@@ -76,6 +85,19 @@ function App() {
           );
         })}
       </Container>
+      <Drawer anchor='bottom' variant="temporary" open={isDrawerOpen} >
+        {cart.length>0?cart.map((item, index) => {
+          return (
+          <>
+            <Typography variant="subtitle1">{item.title}</Typography>
+            <Typography variant="subtitle1">{item.price}</Typography>
+          </>)
+          ;
+        }):"No items in cart"}
+        <IconButton className={classes.IconButton} onClick={toggleDrawer}>
+            <Cancel />
+        </IconButton>
+      </Drawer>
     </div>
   );
 }
