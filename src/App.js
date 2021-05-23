@@ -10,6 +10,7 @@ import {
   CardActions,
   Container,
   Drawer,
+  Grid,
   Typography,
   makeStyles,
   IconButton,
@@ -86,12 +87,31 @@ function App() {
         })}
       </Container>
       <Drawer anchor='bottom' variant="temporary" open={isDrawerOpen} >
+            <Grid container>
+              <Grid item xs={4}>
+                <Typography variant="h6">Title</Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography variant="h6">Description</Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography variant="h6">Price</Typography>
+              </Grid>
+            </Grid>
         {cart.length>0?cart.map((item, index) => {
           return (
-          <>
-            <Typography variant="subtitle1">{item.title}</Typography>
-            <Typography variant="subtitle1">{item.price}</Typography>
-          </>)
+            <Grid container>
+              <Grid item xs={4}>
+                <Typography variant="subtitle1">{item.title}</Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography variant="subtitle1">{item.description}</Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography variant="subtitle1">{item.price}</Typography>
+              </Grid>
+            </Grid>
+          )
           ;
         }):"No items in cart"}
         <IconButton className={classes.IconButton} onClick={toggleDrawer}>
