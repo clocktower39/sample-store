@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Badge,
@@ -15,6 +15,7 @@ import {
   Typography,
   makeStyles,
   IconButton,
+  Slide,
 } from "@material-ui/core";
 import {
   Cancel,
@@ -41,6 +42,7 @@ const useStyles = makeStyles({
 function App() {
   const merchandise = useSelector((state) => state.merchandise);
   const cart = useSelector((state) => state.cart);
+  const [slideIn, setSlideIn] = useState(false);
   const classes = useStyles();
   const dispatch = useDispatch();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -48,6 +50,10 @@ function App() {
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   }
+
+  useEffect(()=>{
+    setSlideIn(true);
+  },[])
 
   return (
     <div className="App">
@@ -60,6 +66,7 @@ function App() {
 
         {merchandise.map((item, index) => {
           return (
+            <Slide direction="right" mountOnEnter unmountOnExit in={slideIn}>
             <Card key={index} className={classes.Card}>
               <CardActionArea>
                 <CardMedia
@@ -87,6 +94,7 @@ function App() {
                 </Button>
               </CardActions>
             </Card>
+            </Slide>
           );
         })}
       </Container>
@@ -102,8 +110,11 @@ function App() {
               <Grid item xs={4}>
                 <Typography variant="h6">Description</Typography>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <Typography variant="h6">Price</Typography>
+              </Grid>
+              <Grid item xs={1}>
+                <Typography variant="h6"></Typography>
               </Grid>
             </Grid>
             <Divider orientation="horizontal" variant="fullWidth"/>
@@ -117,8 +128,13 @@ function App() {
               <Grid item xs={4}>
                 <Typography variant="subtitle1">{item.description}</Typography>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <Typography variant="subtitle1">{item.price}</Typography>
+              </Grid>
+              <Grid item xs={1}>
+                <IconButton>
+                  <RemoveShoppingCart />
+                </IconButton>
               </Grid>
             </>
           )
