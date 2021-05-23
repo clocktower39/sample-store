@@ -9,6 +9,7 @@ import {
   CardContent,
   CardActions,
   Container,
+  Divider,
   Drawer,
   Grid,
   Typography,
@@ -32,6 +33,9 @@ const useStyles = makeStyles({
   Card: {
     margin: "25px 0",
   },
+  CartItemsContainer:{
+    padding: '0 0 50px 0',
+  }
 });
 
 function App() {
@@ -87,6 +91,10 @@ function App() {
         })}
       </Container>
       <Drawer anchor='bottom' variant="temporary" open={isDrawerOpen} >
+        <Container maxWidth="md">
+        <IconButton className={classes.IconButton} onClick={toggleDrawer}>
+            <Cancel />
+        </IconButton>
             <Grid container>
               <Grid item xs={4}>
                 <Typography variant="h6">Title</Typography>
@@ -98,9 +106,11 @@ function App() {
                 <Typography variant="h6">Price</Typography>
               </Grid>
             </Grid>
+            <Divider orientation="horizontal" variant="fullWidth"/>
+            <Grid container className={classes.CartItemsContainer}>
         {cart.length>0?cart.map((item, index) => {
           return (
-            <Grid container>
+            <>
               <Grid item xs={4}>
                 <Typography variant="subtitle1">{item.title}</Typography>
               </Grid>
@@ -110,13 +120,16 @@ function App() {
               <Grid item xs={4}>
                 <Typography variant="subtitle1">{item.price}</Typography>
               </Grid>
-            </Grid>
+            </>
           )
           ;
-        }):"No items in cart"}
-        <IconButton className={classes.IconButton} onClick={toggleDrawer}>
-            <Cancel />
-        </IconButton>
+        }):
+              <Grid item xs={4}>
+                <Typography variant="subtitle1">No items in cart</Typography>
+              </Grid>
+              }
+            </Grid>
+      </Container>
       </Drawer>
     </div>
   );
