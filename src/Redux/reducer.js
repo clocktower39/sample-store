@@ -1,4 +1,4 @@
-import { ADD_TO_CART } from "./actions";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "./actions";
 
 const initialState ={
     merchandise: [
@@ -32,6 +32,13 @@ export let reducer = (state = initialState, action) => {
             return {
                 ...state,
                 cart: [ ...state.cart, action.item ],
+            }
+        case REMOVE_FROM_CART:
+            return {
+                ...state,
+                cart: state.cart.filter((item,i)=>{
+                    return (action.index !== i);
+                }),
             }
         default:
             return {...state}

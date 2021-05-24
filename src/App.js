@@ -23,7 +23,7 @@ import {
   AddShoppingCart,
   RemoveShoppingCart,
 } from "@material-ui/icons";
-import { addToCart } from './Redux/actions';
+import { addToCart, removeFromCart } from './Redux/actions';
 
 import "./App.css";
 
@@ -132,7 +132,9 @@ function App() {
                 <Typography variant="subtitle1">{item.price}</Typography>
               </Grid>
               <Grid item xs={1}>
-                <IconButton>
+                <IconButton
+                  onClick={() => dispatch(removeFromCart(index))}
+                >
                   <RemoveShoppingCart />
                 </IconButton>
               </Grid>
