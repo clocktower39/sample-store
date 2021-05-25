@@ -9,34 +9,30 @@ import {
   CardContent,
   CardActions,
   Container,
-  Divider,
   Drawer,
-  Grid,
   Typography,
   makeStyles,
   IconButton,
   Slide,
 } from "@material-ui/core";
 import {
-  Cancel,
   ShoppingCart,
   AddShoppingCart,
-  RemoveShoppingCart,
 } from "@material-ui/icons";
-import { addToCart, removeFromCart } from './Redux/actions';
-
+import { addToCart } from "./Redux/actions";
+import Cart from './Components/Cart';
 import "./App.css";
 
 const useStyles = makeStyles({
   IconButton: {
-    margin: '25px 0',
+    margin: "25px 0",
   },
   Card: {
     margin: "25px 0",
   },
-  CartItemsContainer:{
-    padding: '0 0 50px 0',
-  }
+  CartItemsContainer: {
+    padding: "0 0 50px 0",
+  },
 });
 
 function App() {
@@ -49,24 +45,28 @@ function App() {
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
-  }
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     setSlideIn(true);
-  },[])
+  }, []);
 
   return (
     <div className="App">
       <Container maxWidth="sm">
         <IconButton className={classes.IconButton} onClick={toggleDrawer}>
-          <Badge badgeContent={cart.length} color="primary" className={classes.CartBadge}>
-            <ShoppingCart style={{color: 'white',}}/>
+          <Badge
+            badgeContent={cart.length}
+            color="primary"
+            className={classes.CartBadge}
+          >
+            <ShoppingCart style={{ color: "white" }} />
           </Badge>
         </IconButton>
 
         {merchandise.map((item, index) => {
           return (
-            <Slide direction="right" mountOnEnter unmountOnExit in={slideIn} >
+            <Slide direction="right" mountOnEnter unmountOnExit in={slideIn}>
               <Card key={index} className={classes.Card}>
                 <CardActionArea>
                   <CardMedia
@@ -89,8 +89,12 @@ function App() {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="primary" onClick={() => dispatch(addToCart(item))}>
-                    <AddShoppingCart/>
+                  <Button
+                    size="small"
+                    color="primary"
+                    onClick={() => dispatch(addToCart(item))}
+                  >
+                    <AddShoppingCart />
                   </Button>
                 </CardActions>
               </Card>
@@ -98,56 +102,8 @@ function App() {
           );
         })}
       </Container>
-      <Drawer anchor='bottom' variant="temporary" open={isDrawerOpen} >
-        <Container maxWidth="md">
-        <IconButton className={classes.IconButton} onClick={toggleDrawer}>
-            <Cancel />
-        </IconButton>
-            <Grid container>
-              <Grid item xs={4}>
-                <Typography variant="h6">Title</Typography>
-              </Grid>
-              <Grid item xs={4}>
-                <Typography variant="h6">Description</Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography variant="h6">Price</Typography>
-              </Grid>
-              <Grid item xs={1}>
-                <Typography variant="h6"></Typography>
-              </Grid>
-            </Grid>
-            <Divider orientation="horizontal" variant="fullWidth"/>
-            <Grid container className={classes.CartItemsContainer}>
-        {cart.length>0?cart.map((item, index) => {
-          return (
-            <>
-              <Grid item xs={4}>
-                <Typography variant="subtitle1">{item.title}</Typography>
-              </Grid>
-              <Grid item xs={4}>
-                <Typography variant="subtitle1">{item.description}</Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography variant="subtitle1">{item.price}</Typography>
-              </Grid>
-              <Grid item xs={1}>
-                <IconButton
-                  onClick={() => dispatch(removeFromCart(index))}
-                >
-                  <RemoveShoppingCart />
-                </IconButton>
-              </Grid>
-            </>
-          )
-          ;
-        }):
-              <Grid item xs={4}>
-                <Typography variant="subtitle1">No items in cart</Typography>
-              </Grid>
-              }
-            </Grid>
-      </Container>
+      <Drawer anchor="bottom" variant="temporary" open={isDrawerOpen}>
+        <Cart open={isDrawerOpen} toggleDrawer={()=>{toggleDrawer()}}/>
       </Drawer>
     </div>
   );
