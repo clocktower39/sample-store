@@ -27,9 +27,6 @@ const useStyles = makeStyles({
   Card: {
     margin: "25px 0",
   },
-  CartItemsContainer: {
-    padding: "0 0 50px 0",
-  },
 });
 
 export default function Merchandise(props) {
