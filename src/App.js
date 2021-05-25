@@ -60,40 +60,40 @@ function App() {
       <Container maxWidth="sm">
         <IconButton className={classes.IconButton} onClick={toggleDrawer}>
           <Badge badgeContent={cart.length} color="primary" className={classes.CartBadge}>
-            <ShoppingCart />
+            <ShoppingCart style={{color: 'white',}}/>
           </Badge>
         </IconButton>
 
         {merchandise.map((item, index) => {
           return (
-            <Slide direction="right" mountOnEnter unmountOnExit in={slideIn}>
-            <Card key={index} className={classes.Card}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  alt={item.description}
-                  height="140"
-                  image="#"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    {item.title}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    ${item.price}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary" onClick={() => dispatch(addToCart(item))}>
-                  <AddShoppingCart/>
-                </Button>
-              </CardActions>
-            </Card>
+            <Slide direction="right" mountOnEnter unmountOnExit in={slideIn} >
+              <Card key={index} className={classes.Card}>
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    alt={item.description}
+                    height="140"
+                    image="#"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {item.title}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      ${item.price}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <Button size="small" color="primary" onClick={() => dispatch(addToCart(item))}>
+                    <AddShoppingCart/>
+                  </Button>
+                </CardActions>
+              </Card>
             </Slide>
           );
         })}
