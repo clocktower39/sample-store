@@ -38,7 +38,6 @@ export default function Cart(props) {
 
   return (
     <Container maxWidth="md" className={classes.root}>
-      <Button variant="contained">Checkout</Button>
       <IconButton className={classes.IconButton} onClick={props.toggleDrawer}>
         <Cancel />
       </IconButton>

@@ -23,6 +23,7 @@ import { addToCart } from "../Redux/actions";
 const useStyles = makeStyles({
   IconButton: {
     margin: "25px 0",
+    zIndex: 1301,
   },
   Card: {
     margin: "25px 0",
