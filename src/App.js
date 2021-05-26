@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Drawer } from "@material-ui/core";
 import Merchandise from './Components/Merchandise';
 import Cart from './Components/Cart';
-import Checkout from './Components/Checkout/Checkout';
 import "./App.css";
 
 function App() {
@@ -17,7 +16,6 @@ function App() {
       <Merchandise toggleDrawer={()=>{toggleDrawer()}} />
       <Drawer anchor="bottom" variant="temporary" open={isDrawerOpen}>
         <Cart toggleDrawer={()=>{toggleDrawer()}}/>
-        <Checkout />
       </Drawer>
     </div>
   );

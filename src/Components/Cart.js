@@ -14,7 +14,12 @@ import {
   RemoveShoppingCart,
 } from "@material-ui/icons";
 import { removeFromCart } from "../Redux/actions";
+import Checkout from './Checkout/Checkout'
+
 const useStyles = makeStyles({
+  root: {
+    height: '85vh',
+  },
   IconButton: {
     margin: "25px 0",
   },
@@ -32,7 +37,7 @@ export default function Cart(props) {
   const dispatch = useDispatch();
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" className={classes.root}>
       <Button variant="contained">Checkout</Button>
       <IconButton className={classes.IconButton} onClick={props.toggleDrawer}>
         <Cancel />
@@ -82,6 +87,7 @@ export default function Cart(props) {
           </Grid>
         )}
       </Grid>
+      <Checkout />
     </Container>
   );
 }
