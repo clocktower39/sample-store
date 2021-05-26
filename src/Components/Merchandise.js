@@ -61,8 +61,7 @@ export default function Merchandise(props) {
                     <CardMedia
                       component="img"
                       alt={item.description}
-                      height="140"
-                      image="#"
+                      image={item.image}
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="h2">

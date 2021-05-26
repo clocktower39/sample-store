@@ -6,19 +6,19 @@ const initialState ={
             title: 'M&P 500',
             description: 'Hand gun',
             price: '500.00',
-            imgSource: '',
+            image: 'https://snwcdnprod.azureedge.net/sites/default/files/styles/product_main/public/firearms/images/12458-mp-OnWhite-Left2.png?itok=zSbipMj7',
         },
         {
             title: 'MacBook Pro',
             description: '2013 Model 13.3" screen',
             price: '750.00',
-            imgSource: '',
+            image: 'https://i.pcmag.com/imagery/reviews/04H9r1RQFchgma6VWvhWHJR-5.1569473926.fit_scale.size_1182x665.jpg',
         },
         {
             title: 'Rubik\'s Cube',
             description: '3x3',
             price: '10.00',
-            imgSource: '',
+            image: 'https://upload.wikimedia.org/wikipedia/commons/8/81/Rubix_cube.jpg',
         },
     ],
     cart: [

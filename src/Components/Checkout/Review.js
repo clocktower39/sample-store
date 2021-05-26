@@ -31,6 +31,13 @@ export default function Review() {
   const classes = useStyles();
   const cart = useSelector(state => state.cart);
 
+  const total = cart.reduce((accumulator, currentValue) => accumulator + Number(currentValue.price) ,0);
+
+    var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    });
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -46,7 +53,7 @@ export default function Review() {
         <ListItem className={classes.listItem}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" className={classes.total}>
-            $34.06
+            {formatter.format(total)}
           </Typography>
         </ListItem>
       </List>

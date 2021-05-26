@@ -60,7 +60,7 @@ export default function Cart(props) {
         {cart.length > 0 ? (
           cart.map((item, index) => {
             return (
-              <>
+              <React.Fragment key={index}>
                 <Grid item xs={4}>
                   <Typography variant="subtitle1">{item.title}</Typography>
                 </Grid>
@@ -77,7 +77,7 @@ export default function Cart(props) {
                     <RemoveShoppingCart />
                   </IconButton>
                 </Grid>
-              </>
+              </React.Fragment>
             );
           })
         ) : (
